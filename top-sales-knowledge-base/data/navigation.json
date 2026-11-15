@@ -1,0 +1,92 @@
+[
+  {
+    "label": "Обзор",
+    "href": "index.html",
+    "icon": "⌂"
+  },
+  {
+    "group": "ПРОЦЕССЫ ПРОДАЖ",
+    "items": [
+      {
+        "label": "Звонки и скрипты",
+        "href": "pages/calls.html",
+        "icon": "☎"
+      },
+      {
+        "label": "Повторный контакт",
+        "href": "pages/calls.html#repeat",
+        "icon": "↻"
+      },
+      {
+        "label": "Личные встречи",
+        "href": "pages/visits.html",
+        "icon": "◉"
+      },
+      {
+        "label": "Мастер-классы и ДОД",
+        "href": "pages/events.html",
+        "icon": "✦"
+      },
+      {
+        "label": "Работа в CRM",
+        "href": "pages/crm.html",
+        "icon": "▦"
+      },
+      {
+        "label": "Работа с возражениями",
+        "href": "pages/objections.html",
+        "icon": "◇"
+      },
+      {
+        "label": "Договоры и оплаты",
+        "href": "pages/contracts.html",
+        "icon": "▤"
+      },
+      {
+        "label": "Шаблоны сообщений",
+        "href": "pages/messages.html",
+        "icon": "✉"
+      }
+    ]
+  },
+  {
+    "group": "СПРАВОЧНИКИ",
+    "items": [
+      {
+        "label": "Глоссарий и платформы",
+        "href": "pages/references.html",
+        "icon": "⌕"
+      }
+    ]
+  },
+  {
+    "group": "ОБРАЗОВАТЕЛЬНЫЕ НАПРАВЛЕНИЯ",
+    "items": [
+      {
+        "label": "Детское доп. образование",
+        "href": "pages/child-education.html",
+        "icon": "▣"
+      },
+      {
+        "label": "Взрослое доп. образование",
+        "href": "pages/adult-education.html",
+        "icon": "▣"
+      },
+      {
+        "label": "Колледж",
+        "href": "pages/college.html",
+        "icon": "▣"
+      },
+      {
+        "label": "ВУЗ",
+        "href": "pages/university.html",
+        "icon": "▣"
+      }
+    ]
+  },
+  {
+    "label": "Реестр документов",
+    "href": "pages/sources.html",
+    "icon": "☷"
+  }
+]
