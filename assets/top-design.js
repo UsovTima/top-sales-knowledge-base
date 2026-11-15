@@ -33,7 +33,9 @@
     download: '<path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/>',
     check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
     up: '<path d="M12 19V5"/><path d="m6 11 6-6 6 6"/>',
-    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>'
+    menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2.9-1.2 1.7"/><path d="M12 16.6v.1"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
   };
   function svg(name, label) {
     var a = label ? ' role="img" aria-label="' + esc(label) + '"' : ' aria-hidden="true"';
@@ -54,6 +56,8 @@
     messages: { icon: 'mail', tone: 'sales', kind: 'Процесс продаж' },
     references: { icon: 'book', tone: 'ref', kind: 'Справочник' },
     sources: { icon: 'list', tone: 'ref', kind: 'Реестр' },
+    faq: { icon: 'help', tone: 'ref', kind: 'Справочник' },
+    workspace: { icon: 'link', tone: 'ref', kind: 'Рабочий раздел' },
     'child-education': { icon: 'rocket', tone: 'child', kind: 'Образовательное направление' },
     'adult-education': { icon: 'briefcase', tone: 'adult', kind: 'Образовательное направление' },
     college: { icon: 'textbook', tone: 'college', kind: 'Образовательное направление' },
@@ -99,7 +103,26 @@
   /* ---------- шпаргалки: только формулировки из первоисточников ---------- */
   var CHEAT = {
     calls: [{
-      tab: 'Первый контакт', doc: 'doc-043', title: 'Первый контакт: структура звонка', src: 'примерные сценарии «Промо-визит», «Демо» и «Промо-МК»',
+      tab: 'Заявка / входящий звонок', doc: 'doc-027', title: 'Первый контакт после заявки или входящего звонка', src: 'сценарий звонка по заявке и регламент работы в CRM',
+      lead: 'Контакт с любым новым лидом — в течение 30 минут после поступления (в рабочее время). Цель первого контакта — продать визит.',
+      steps: [
+        ['Проверьте номер в CRM', 'Есть история — общаемся как со знакомым человеком, напоминая, по какому поводу общались. Истории нет — знакомимся и идём по структуре звонка'],
+        ['Приветствие', '«Имя, добрый день. Меня зовут …, Компьютерная Академия ТОП. Вы оставили заявку на обучение»'],
+        ['Выявление потребности', '«Для себя или для ребёнка? Сколько лет? Как зовут? Какова цель? Был ли опыт? Что ждёте от обучения?» Резюме: «Правильно понимаю, что вы хотите…»'],
+        ['Краткая ценностная презентация', 'Подходящая программа и ценности с отсылкой на потребность: современная программа, проектный подход, преподаватели-практики, отдел заботы о студентах'],
+        ['Переход к визиту', 'Вступительное тестирование — чтобы точнее определить уровень, с которого начинать, «чтобы было не сложно и не легко». Плюс аудитории, работы студентов, общение с преподавателем'],
+        ['Согласование времени', '«Завтра есть два свободных слота, Вам удобно в первую или вторую половину дня?» Называем адрес, отправляем напоминание в мессенджер'],
+        ['Источник рекламы', '«Подскажите, по какой рекламе оставили заявку?» — указываем реальный источник'],
+        ['Запись в CRM', 'Новый лид вносится через «Входящий звонок». Результат — «назначена встреча», комментарий — содержательный']
+      ],
+      facts: [
+        ['Если не дозвонились по заявке', ['В день заявки (утром и ближе к вечеру) → завтра → через 3 дня → через неделю → через месяц', 'При каждом недозвоне — сообщение в мессенджер по готовому шаблону']],
+        ['Если звонок поступил во время визита', ['Извиниться перед клиентом, ответить, сказать, что заняты с клиентом в Академии, записать номер и перезвонить', 'Игнорировать входящие звонки запрещается']],
+        ['Если в городе два филиала', ['«У нас в городе 2 адреса, давайте выберем, какой для вас удобнее»', 'Клиент выбрал другой филиал — передаём контакт туда, с ним свяжутся в ближайшее время']],
+        ['Комментарий в CRM', ['С кем говорили, сколько лет, был ли опыт в IT', 'Какая цель обучения, что важно для лида', 'Что презентовали, о чём договорились и цель следующего контакта']]
+      ]
+    }, {
+      tab: 'Звонок по промо и демо', doc: 'doc-043', title: 'Первый контакт: структура звонка', src: 'примерные сценарии «Промо-визит», «Демо» и «Промо-МК»',
       lead: 'Цель звонка — конвертация на вступительное тестирование (визит) или мастер-класс. Сделка = согласование даты визита и времени тестирования либо запись на мероприятие.',
       steps: [
         ['Установление контакта', '«Имя, добрый день. Меня зовут …, Компьютерная Академия ТОП» — и повод звонка: оставили контакты промоутеру, скачали демо-урок'],
@@ -226,7 +249,7 @@
     ['Анализ продаж', 'Работа в CRM', 'pages/crm.html']
   ];
   var ROUTE = [
-    ['Выучить язык отдела', 'Термины, сервисы и платформы, с которыми вы будете работать каждый день.', [['Глоссарий и платформы', 'pages/references.html']]],
+    ['Выучить язык отдела', 'Термины, сервисы и платформы, с которыми вы будете работать каждый день.', [['Глоссарий и платформы', 'pages/references.html'], ['Вопрос — ответ', 'pages/faq.html'], ['Ссылки и контакты', 'pages/workspace.html']]],
     ['Разобраться с CRM', 'Что считается лидом, как вносить заявки и что делать при недозвоне.', [['Работа в CRM', 'pages/crm.html'], ['Регламент', 'pages/doc-doc-049.html']]],
     ['Первый звонок', 'Сценарии первого контакта и приглашения — выбирайте под ситуацию.', [['Звонки и скрипты', 'pages/calls.html']]],
     ['Сообщения клиенту', 'Готовые шаблоны: копируйте и подставляйте имя.', [['Шаблоны сообщений', 'pages/messages.html']]],
@@ -369,10 +392,10 @@
     { pic: 'blocks', age: '7–8 лет', name: '«Первый шаг»', len: '2 года', doc: 'doc-046', tone: 'child',
       does: 'Первые 2D-игры в Scratch, мультфильмы и комиксы, 3D-модели, роботы LEGO WeDo',
       list: ['IT-старт', 'Введение в программирование на Scratch', 'Мультипликация', 'Моделирование 3D-мира', 'Медиа и блоггинг', 'Робототехника LEGO WeDo', 'Графический дизайн', 'Minecraft Education', '3D-скульптинг'] },
-    { pic: 'gamepad', age: '9–12 лет', name: 'Малая Компьютерная Академия', len: '3 курса', doc: 'doc-009', tone: 'adult',
+    { pic: 'gamepad', age: '9–12 лет', name: 'Малая Компьютерная Академия', len: '5 курсов', doc: 'doc-009', tone: 'adult',
       does: 'Собственные игры в Roblox Studio, Construct 3 и Unity, сайты, приложения на Python, роботы и гаджеты',
       list: ['Старт в IT', 'Разработка игр: Kodu, Construct 3, Roblox Studio, GODOT, Unity', 'Программирование на Python', 'Веб-дизайн (HTML & CSS), сайты на WordPress', '3D-моделирование и виртуальная реальность', 'Робототехника LEGO', 'Micro:bit и Arduino', 'UX/UI в Figma', 'Стартап и фриланс'] },
-    { pic: 'laptop', age: '13–14 лет', name: 'Малая Компьютерная Академия', len: '2 курса', doc: 'doc-010', tone: 'college',
+    { pic: 'laptop', age: '13–14 лет', name: 'Малая Компьютерная Академия', len: '3 курса', doc: 'doc-010', tone: 'college',
       does: 'Брендбук, сайт и интернет-магазин, игры на GODOT, устройства на Arduino: мини-пианино, рисующий робот',
       list: ['Программирование на Python: Junior → Middle', 'Разработка игр: Construct 3 → GODOT', 'Игровой дизайн и диджитал-арт', 'Веб-дизайн (HTML & CSS), сайты на WordPress', 'UX/UI и прототипирование в Figma', '3D-моделирование и 3D-печать', 'Создание гаджетов на Arduino', 'Робототехника LEGO'] },
     { pic: 'cap', age: 'Дальше', name: 'Колледж и университет', len: 'экосистема Академии TOP', tone: 'university',
@@ -399,6 +422,148 @@
       '<div class="td-fact"><h3>Что важно родителю</h3><ul><li>Гибкий график: будние дни или выходной</li><li>Малокомплектные группы и современное оборудование</li><li>Преподаватели-практики доносят материал в игровой форме</li><li>Адаптивный подход: темп регулируют и преподаватель, и студент</li><li>Онлайн-сервисы Академии: родитель получает информацию об успехах ребёнка</li></ul></div>' +
       '<div class="td-fact"><h3>Шесть принципов обучения</h3><ul><li>Доступность — сложное на простых и понятных примерах</li><li>Применимость — знания для жизни и будущей профессии</li><li>Интерес — задания интересны детям</li><li>Системность — знания растут с каждым месяцем и курсом</li><li>Результативность — каждое занятие нацелено на практический результат</li><li>Обучение через деятельность</li></ul></div></div>';
     return h + '<p class="td-disclaimer">Блок собран из буклетов программ, чтобы быстро подготовиться к презентации. Полный перечень предметов и точные формулировки — в исходных материалах ниже.</p></section>';
+  }
+
+  /* ---------- коротко о направлении (5 образовательных разделов) — факты из буклетов и инструкций ---------- */
+  var BRIEF = {
+    'child-education': { name: 'Малая Компьютерная Академия', who: 'Детям и подросткам 7–14 лет: программирование, игры, дизайн, робототехника — с нуля, через проекты.', doc: 'doc-009', src: 'буклеты «Первый шаг», МКА 9–12, МКА 13–14',
+      facts: [['Возраст', '7–14 лет'], ['Программы', '7–8 лет — 2 года · 9–12 лет — 5 курсов · 13–14 лет — 3 курса'], ['Формат', 'В филиале; также доступно онлайн-обучение'], ['График', 'Будние дни или выходной'], ['Результат', 'Каждый предмет заканчивается защитой проекта']] },
+    'adult-education': { name: 'Курсы для взрослых', who: 'Взрослым, которые хотят освоить профессию в IT и диджитал или усилить текущую: дизайн, разработка, аналитика, маркетинг, управление, 1С, нейросети.', src: 'сводная таблица программ', anchor: '#adult-summary',
+      facts: [['Программ', '27 в сводной таблице'], ['Занятия', 'Обычно 2 раза в неделю по 2 пары (1 час 20 минут, перерыв 10 минут, ещё 1 час 20 минут)'], ['Короткая программа', '«Мастер нейросетей» — 24 урока, 3 месяца'], ['Вход', 'Есть курсы с нуля и курсы для тех, у кого уже есть база'], ['Документ', 'Диплом Академии ТОП на русском и английском языках']] },
+    college: { name: 'Московский международный колледж цифровых технологий «Академия TOП»', who: 'Выпускникам 9 и 11 классов и школьникам 8–11 классов, которые хотят IT-профессию и государственный диплом.', doc: 'doc-004', src: 'буклет программы «Компьютерная графика и дизайн»; сроки других программ — в их буклетах',
+      facts: [['Поступление', 'Без ОГЭ и ЕГЭ'], ['На базе 9 класса', '2 года 10 месяцев'], ['На базе 11 класса', '1 год 10 месяцев'], ['Параллельно школе', '3 года 6 месяцев, для 8–11 классов'], ['Формат', 'Очно или дистанционно'], ['Диплом', 'Государственный, о среднем профессиональном образовании']] },
+    university: { name: 'Технополис', who: 'Тем, кто хочет высшее образование в IT и дизайне с практикой и стажировками в IT-компаниях.', doc: 'doc-016', src: 'буклет ВУЗа',
+      facts: [['Уровень', 'Бакалавриат'], ['Срок обучения', '4 года'], ['Ускоренно', '2,5 года — на базе диплома СПО или ВО'], ['Направления', 'Прикладная информатика · Дизайн'], ['Диплом', 'О высшем образовании государственного образца'], ['Практика', 'Стажировка в IT-компаниях, трудоустройство во время обучения']] },
+    'private-school': { name: 'TOP IT SCHOOL', who: 'Семьям, которые выбирают частную школу полного дня с углублённым изучением IT и английского языка.', doc: 'doc-061', src: 'инструкция для отдела продаж по воронке «Школа» и регламент «Общие принципы и этапы»',
+      facts: [['Классы', 'С 1 по 11'], ['Режим', 'Школа полного дня, с 9 до 17'], ['Опора', 'Открыта на базе Компьютерной Академии TOP, работаем с 2008 года'], ['По телефону', 'Продаём визит, а не программу'], ['Встреча', 'До 60 минут; сначала консультация, потом собеседование'], ['Форматы знакомства', 'Классика — родители без ребёнка · «2 в 1» — вся семья, полтора часа']] }
+  };
+  function briefHtml(bf) {
+    var link = bf.doc ? '<a href="doc-' + bf.doc + '.html">Открыть первоисточник →</a>' : (bf.anchor ? '<a href="' + bf.anchor + '">Перейти к таблице →</a>' : '');
+    return '<section class="td-brief td-anim" id="td-brief" aria-label="Коротко о направлении"><div class="td-brief-main"><span class="td-kind td-kind-tone">Коротко о направлении</span><h2>' + esc(bf.name) + '</h2><p>' + esc(bf.who) + '</p></div>' +
+      '<dl class="td-brief-facts">' + bf.facts.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>' +
+      '<p class="td-cheat-src td-brief-src">Источник: ' + esc(bf.src) + '. ' + link + '</p></section>';
+  }
+
+  /* ---------- вопрос — ответ: только то, что написано в материалах базы ---------- */
+  var FAQ = [
+    ['Звонки', 'Через сколько нужно связаться с новой заявкой?', ['Контакт с любым новым лидом совершается в течение 30 минут после поступления (в рабочее время).', 'Цель первого контакта — продать визит, а не продукт.'], 'doc-049'],
+    ['Звонки', 'Не дозвонился по новой заявке — что дальше?', ['Звоним по схеме: в день заявки (утром и ближе к вечеру) → завтра → через 3 дня → через неделю → через месяц.', 'При каждом недозвоне отправляем сообщение в мессенджер по готовому шаблону — они собраны в разделе «Шаблоны сообщений».', 'Запрещается связываться с лидом раньше назначенной даты (если от него нет пропущенного или повторной заявки) и пропускать дату контакта.'], 'doc-049'],
+    ['Звонки', 'Клиент по телефону спрашивает цену', ['«Стоимость зависит от направления обучения, расписания группы, формы оплаты, лояльности, на которую можете попасть».', 'Если настаивает — отвечаем по скрипту про диапазон цен «от».'], 'doc-043'],
+    ['Звонки', 'Клиент по телефону спрашивает расписание', ['«Мы не сможем вас сориентировать на данном этапе, так как всё зависит от того, какая группа подойдёт после тестирования, и это разные варианты расписаний».', 'В целом есть будни и выходные, день и вечер.'], 'doc-043'],
+    ['Звонки', 'Звонок поступил, когда я веду визит', ['Извиниться перед клиентом, ответить, сказать, что занят с клиентом в Академии, записать номер и перезвонить.', 'Любой другой сотрудник в Академии делает то же самое: отвечает и записывает номер, позже МОП перезванивает.', 'Игнорировать входящие звонки запрещается.'], 'doc-049'],
+    ['Звонки', 'Клиент записался, но не пришёл на встречу', ['Звоним повторно: приветствие → краткое напоминание о предыдущем контакте → один поторапливающий фактор → приглашение на встречу.', 'Отказывается от встречи — приглашаем на мастер-класс. МК не интересен — уточняем, интересно ли вообще образование в IT, и работаем с возражениями.'], 'doc-041'],
+    ['Звонки', 'Нужно ли напоминать о визите или мастер-классе?', ['Да. Если встреча назначена на 16 октября в 11:00 — звоним с подтверждением 15 октября и отправляем напоминание в мессенджер.', 'Если встреча в 18:30 — можно позвонить для подтверждения в тот же день в 10:00.'], 'doc-049'],
+    ['CRM', 'Кого считаем лидом, а кого нет?', ['Лид — человек, который проявил интерес к нашим услугам и оставил контактные данные: номер телефона, онлайн-заявку или сам позвонил с вопросами о программе.', 'Не лид: звонки по рекламе, вакансии или предложениям сотрудничества — контакты, которые обучение не рассматривают.'], 'doc-049'],
+    ['CRM', 'Клиент говорит «увидел на сайте» — какой источник рекламы указать?', ['Рекламы «сайт», «сарафан», «мастер-класс», «поисковые системы» не существует.', 'Уточните, что привело на сайт: «Пользовались поисковиком (Яндекс, Гугл)? Видели в соцсетях (ВК, Телеграм)? Или это была статья?»', 'Важен последний источник, который привёл к действию.'], 'doc-049'],
+    ['CRM', 'Какой результат звонка выбрать?', ['Продали визит — «назначена встреча». Записали на мероприятие — «мероприятие».', '«Ждёт звонка» — горячий клиент, с которым договорились созвониться.', '«Будет думать» — когда не удалось прийти к общему знаменателю: отказывается от встречи и МК, пока не готов.', '«Отказ» — только если по всей схеме дозвона клиент так и не вышел на связь либо просит удалить его из базы.'], 'doc-049'],
+    ['CRM', 'Что писать в комментарии к звонку или визиту?', ['С кем говорили, как зовут, сколько лет. Был ли опыт в сфере IT. Какая цель обучения и где собираются применять навыки. Что важно для лида. Что презентовали. О чём договорились и цель следующего контакта.', 'Если был визит — прописываем балл тестирования. Оставлять неоформленные записи звонков недопустимо.'], 'doc-049'],
+    ['Встреча', 'Клиент слабо прошёл тестирование — как сказать?', ['Преподносите любой результат в позитивном ключе: либо как возможность многому научиться, либо как хорошую базу для начала обучения.', 'Заранее объясните, что это не экзамен, а тест на текущие навыки, чтобы подобрать наиболее комфортную группу.'], 'doc-042'],
+    ['Встреча', 'Клиент говорит «Дорого»', ['Присоединение: «Я понимаю вас, на первый взгляд так может показаться».', 'Возражение «дорого» возникает, когда ценность не соответствует цене: задача — создать и подтвердить ценность.', 'Не возражайте в ответ на возражение: выясните, на чём оно основано, и отвечайте по формуле «присоединение + фраза-связка + аргумент».'], 'doc-036'],
+    ['Встреча', 'Клиент говорит «Я подумаю»', ['«Понимаю вас, я и сам люблю взвешенно принимать решение, особенно когда речь идёт о выборе профессии».', '«Когда мне говорят „Я подумаю“ — это чаще всего означает, что есть ещё вопросы, которые вас немного смущают. Скажите честно, что вас останавливает?»'], 'doc-036'],
+    ['Встреча', 'Клиент говорит «Я посоветуюсь»', ['«Да, я понимаю вас… При обсуждении такого важного вопроса действительно важно принять взвешенное решение. А советоваться по поводу чего хотите?» — направление, формат, стоимость обучения.'], 'doc-036'],
+    ['Встреча', 'Как объяснить обеспечительный платёж?', ['При оплате по частям первый платёж идёт за первый и последний месяц в программе обучения.', 'За самый последний месяц платить не нужно: уже лежит депозит — «это как при аренде квартиры».', 'Обеспечительный платёж — это правило поступления в Академию.'], 'doc-052'],
+    ['Колледж', 'Можно ли называть стоимость колледжа по телефону?', ['Максимально избегаем озвучивания стоимости по телефону; если клиент настаивает — называем цену «от».', 'По телефону можно выдать: стоимость, если клиент настаивает, и направления, которые есть. Подробности — на встрече.'], 'doc-031'],
+    ['Колледж', '«Нет бюджетных мест и общежития»', ['«Да, действительно, у нас не бесплатное обучение, и выбор делать вам».', 'Общежитие не предоставляем: это значительно удорожило бы стоимость обучения. Родители и студенты сами выбирают уровень комфорта для проживания.'], 'doc-031'],
+    ['Колледж', '«А группа наберётся?»', ['Мы запускаем не просто группу, а целое направление — колледж.', 'Наши студенты учатся уже не первый год в десятках наших колледжей по стране, и мы видим их результаты уже сейчас.'], 'doc-031'],
+    ['Частная школа', 'Чем консультация отличается от собеседования?', ['Консультация — продажа продукта: экскурсия, презентация, ответы на вопросы. Собеседование — отбор, вступительное испытание.', 'Клиент не может перейти к собеседованию, минуя консультацию (исключение — повторные обращения, решение принимает директор).', 'Любая встреча укладывается в 60 минут.'], 'doc-064'],
+    ['Частная школа', 'Родители говорят «Дорого» или «У конкурентов дешевле»', ['В стоимость входит всё: английский, IT, психолог, спорт, кружки — экономия на репетиторах и секциях.', '«У нас всё включено. Посчитайте, сколько вы доплатите за кружки, репетиторов и продлёнку».'], 'doc-061'],
+    ['Частная школа', 'Родители говорят «Подумаем»', ['«Подумать лучше с фактами. Давайте запишем ребёнка на пробный день — бесплатно».'], 'doc-061'],
+    ['Частная школа', '«Новая школа — а вдруг закроетесь?»', ['«Мы работаем с 2008 года как Академия TOP, школа — логичное развитие».'], 'doc-061'],
+    ['Мастер-классы', 'Что сделать после мастер-класса?', ['По данным из анкет отметить клиентов в разделе «Мероприятия»: «Был на МК» и «Планирует учиться».', 'На следующий день позвонить всем, кто не оформил договор, и направить сообщение со ссылками, где можно оставить отзыв об МК.'], 'doc-048']
+  ];
+  function faqHtml() {
+    var groups = []; FAQ.forEach(function (f) { if (groups.indexOf(f[0]) < 0) groups.push(f[0]); });
+    var h = '<div class="td-filter td-faq-tools" data-td="1"><input type="search" id="tdFaqSearch" placeholder="Найти вопрос: цена, недозвон, дорого…" aria-label="Поиск по вопросам">' +
+      '<div class="td-tabs td-tabs-wrap" role="tablist" aria-label="Тема">' + ['Все темы'].concat(groups).map(function (g, i) { return '<button type="button" role="tab" class="td-tab' + (i ? '' : ' td-on') + '" aria-selected="' + (i ? 'false' : 'true') + '" data-faq="' + (i ? esc(g) : '') + '">' + esc(g) + '</button>'; }).join('') + '</div>' +
+      '<span class="td-filter-state" id="tdFaqCount"></span></div><div class="td-faq" id="tdFaq">';
+    h += FAQ.map(function (f, i) {
+      var d = BYID[f[3]];
+      return '<details class="td-q" data-g="' + esc(f[0]) + '"><summary><span class="td-chip td-cat">' + esc(f[0]) + '</span><b>' + esc(f[1]) + '</b></summary><div class="td-a">' + f[2].map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
+        '<p class="td-a-src">Источник: «' + esc(d ? pretty(d.name) : '') + '». <a href="doc-' + f[3] + '.html">Открыть →</a></p></div></details>';
+    }).join('');
+    return h + '</div><div class="empty" id="tdFaqEmpty" hidden>По этому запросу вопросов нет. Попробуйте другое слово или поиск по базе знаний вверху страницы.</div><p class="td-disclaimer">Ответы собраны из материалов базы знаний без изменения смысла. Если ситуация не описана — уточните у руководителя.</p>';
+  }
+  function faqFilter() {
+    var q = (document.getElementById('tdFaqSearch') || {}).value || '', on = document.querySelector('.td-faq-tools .td-tab.td-on'), g = on ? on.dataset.faq : '', n = 0;
+    q = q.trim().toLowerCase();
+    document.querySelectorAll('.td-q').forEach(function (el) { var show = (!g || el.dataset.g === g) && (!q || el.textContent.toLowerCase().indexOf(q) !== -1); el.hidden = !show; if (show) n++; });
+    var c = document.getElementById('tdFaqCount'), e = document.getElementById('tdFaqEmpty'); if (c) c.textContent = 'Показано вопросов: ' + n + ' из ' + FAQ.length; if (e) e.hidden = n > 0;
+  }
+
+  /* ---------- рабочие ссылки и контакты: общий файл data/workspace.json + правка прямо на странице ---------- */
+  var WS = null, wsAsked = false, wsEdit = false, wsLocal = false;
+  var WS_KEY = 'top-kb-workspace', WS_EDIT_URL = 'https://github.com/UsovTima/top-sales-knowledge-base/edit/main/data/workspace.json';
+  var WS_COLS = { tables: [['name', 'Название', 'Например: Таблица визитов'], ['url', 'Ссылка', 'https://…'], ['note', 'Для чего', 'Кто и когда заполняет']], contacts: [['name', 'Имя', 'Имя и фамилия'], ['role', 'Должность', 'Например: директор филиала'], ['phone', 'Телефон', '+7 …'], ['link', 'Мессенджер или почта', 'Ссылка или адрес'], ['note', 'По каким вопросам', 'Договоры, расписание…']] };
+  function wsNorm(d) { d = d && typeof d === 'object' ? d : {}; return { branch: String(d.branch || ''), updated: String(d.updated || ''), tables: Array.isArray(d.tables) ? d.tables : [], contacts: Array.isArray(d.contacts) ? d.contacts : [] }; }
+  function loadWs() {
+    if (wsAsked) return; wsAsked = true;
+    var local = null; try { local = JSON.parse(localStorage.getItem(WS_KEY) || 'null'); } catch (e) { local = null; }
+    fetch(BASE + 'data/workspace.json?t=' + Date.now()).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }).then(function (d) {
+      WS = { shared: wsNorm(d), cur: wsNorm(local || d) }; wsLocal = !!local; schedule();
+    });
+  }
+  function safeUrl(u) { u = String(u || '').trim(); if (/^(https?:\/\/|mailto:|tel:)/i.test(u)) return u; if (/^[\w.+-]+@[\w-]+\.[\w.-]+$/.test(u)) return 'mailto:' + u; if (/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(u)) return 'https://' + u; return ''; }
+  function wsHtml() {
+    var d = WS.cur, h = '';
+    h += '<div class="td-ws-bar"><div><b>' + (wsLocal ? 'Показана ваша версия — её видите только вы, в этом браузере' : 'Показана общая версия — её видят все') + '</b><span>' + (d.updated ? 'Обновлено: ' + esc(d.updated) : 'Раздел можно дополнять в любой момент') + '</span></div><div class="td-ws-actions">' +
+      (wsEdit ? '<button type="button" class="btn" id="tdWsSave">Сохранить</button><button type="button" class="td-reset" id="tdWsCancel">Отмена</button>' : '<button type="button" class="btn" id="tdWsEdit">Редактировать</button>') +
+      (wsLocal && !wsEdit ? '<button type="button" class="td-reset" id="tdWsPublish">Опубликовать для всех</button><button type="button" class="td-reset" id="tdWsDrop">Вернуть общую версию</button>' : '') + '</div></div>';
+    h += '<div class="td-ws-help" id="tdWsHelp" hidden></div>';
+    [['tables', 'Рабочие таблицы и ссылки', 'Таблицы филиала, отчёты, расписания, папки — всё, что открываете каждый день.'], ['contacts', 'Коллеги филиала', 'К кому идти с вопросом и как связаться.']].forEach(function (s) {
+      var rows = d[s[0]], cols = WS_COLS[s[0]];
+      h += '<div class="section-head"><div><h2>' + s[1] + '</h2><p>' + s[2] + '</p></div></div>';
+      if (wsEdit) {
+        h += '<div class="td-ws-edit" data-ws="' + s[0] + '">' + (rows.length ? rows : [{}]).map(function (r) { return wsRow(cols, r); }).join('') + '</div><button type="button" class="td-reset td-ws-add" data-ws-add="' + s[0] + '">+ Добавить строку</button>';
+      } else if (!rows.length) {
+        h += '<div class="empty">Пока ничего не добавлено. Нажмите «Редактировать», чтобы внести ' + (s[0] === 'tables' ? 'первую ссылку' : 'первый контакт') + '.</div>';
+      } else if (s[0] === 'tables') {
+        h += '<div class="td-ws-grid">' + rows.map(function (r) { var u = safeUrl(r.url); return '<' + (u ? 'a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"' : 'div') + ' class="td-ws-card"><span class="td-ws-ico">' + svg('link') + '</span><b>' + esc(r.name || r.url || 'Без названия') + '</b>' + (r.note ? '<span>' + esc(r.note) + '</span>' : '') + (u ? '<i>Открыть ↗</i>' : '<i class="td-ws-bad">Ссылка не указана</i>') + '</' + (u ? 'a' : 'div') + '>'; }).join('') + '</div>';
+      } else {
+        h += '<div class="td-ws-grid">' + rows.map(function (r) { var tel = String(r.phone || '').replace(/[^\d+]/g, ''), u = safeUrl(r.link); return '<div class="td-ws-card td-ws-person"><span class="td-ws-ico">' + esc(String(r.name || '?').trim().charAt(0).toUpperCase()) + '</span><b>' + esc(r.name || 'Без имени') + '</b>' + (r.role ? '<span class="td-ws-role">' + esc(r.role) + '</span>' : '') + (r.note ? '<span>' + esc(r.note) + '</span>' : '') + '<span class="td-ws-links">' + (tel ? '<a href="tel:' + esc(tel) + '">' + esc(r.phone) + '</a>' : '') + (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(/^mailto:/.test(u) ? u.slice(7) : 'Написать ↗') + '</a>' : '') + '</span></div>'; }).join('') + '</div>';
+      }
+    });
+    return h + '<p class="td-disclaimer">Сайт открыт по ссылке всем, у кого она есть: не указывайте личные номера и адреса без согласия коллег. Изменения сначала сохраняются только в вашем браузере; чтобы их увидели все, нажмите «Опубликовать для всех».</p>';
+  }
+  function wsRow(cols, r) { return '<div class="td-ws-row">' + cols.map(function (c) { return '<label><span>' + c[1] + '</span><input type="text" data-f="' + c[0] + '" value="' + esc(r[c[0]] || '') + '" placeholder="' + esc(c[2]) + '"></label>'; }).join('') + '<button type="button" class="td-ws-del" aria-label="Удалить строку" title="Удалить строку">×</button></div>'; }
+  function wsCollect() {
+    var out = { branch: WS.cur.branch, updated: new Date().toLocaleDateString('ru-RU'), tables: [], contacts: [] };
+    document.querySelectorAll('.td-ws-edit').forEach(function (box) {
+      box.querySelectorAll('.td-ws-row').forEach(function (row) { var o = {}, any = false; row.querySelectorAll('input').forEach(function (i) { var v = i.value.trim(); if (v) { o[i.dataset.f] = v; any = true; } }); if (any) out[box.dataset.ws].push(o); });
+    });
+    return out;
+  }
+  function wsPaint() { var box = document.getElementById('tdWs'); if (box && WS) box.innerHTML = wsHtml(); }
+
+  /* ---------- контакты филиала: подставляются в шаблоны сообщений вместо общих номеров и адресов ---------- */
+  var BRANCH = { phones: ['+7 (863) 310-04-05', '+7 (938) 122-50-41'], email: 'rostov@top-academy.ru' };
+  function localize(t) {
+    return String(t).replace(/[\u202a\u202c]/g, '')
+      .replace(/\+7\s*\(495\)\s*152[\s-]*41[\s-]*52/g, BRANCH.phones.join(', '))
+      .replace(/(?:(?:soprovozhdenie|distant_ru|top_online)@top-academy\.ru[,\s]*)+/g, function (m) { return BRANCH.email + (/\s$/.test(m) ? ' ' : ''); });
+  }
+  function localizeTemplates(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(function (x) { var v = localize(x.nodeValue); if (v !== x.nodeValue) x.nodeValue = v; });
+    root.querySelectorAll('[data-copy]').forEach(function (b) { var v = localize(b.dataset.copy); if (v !== b.dataset.copy) b.dataset.copy = v; });
+  }
+  /* шаблоны при недозвоне: № 6 — из регламента записи на МК; № 1–5 составлены по схеме дозвона из регламента CRM и согласованы владельцем 15.11.2026 */
+  var TEL = BRANCH.phones.join(', ');
+  var NDZ = [
+    ['Недозвон по новой заявке', 'В день заявки, после первого недозвона', 'ИМЯ, здравствуйте! Это ИМЯ МЕНЕДЖЕРА, Компьютерная Академия ТОП. Вы оставляли заявку на обучение — звоню, но не получилось дозвониться. Подскажите, пожалуйста, когда Вам удобно поговорить? Отвечу на вопросы и помогу подобрать программу.\nНаш телефон: ' + TEL, 0],
+    ['Повторный недозвон', 'На следующий день и через 3 дня', 'ИМЯ, добрый день! Это ИМЯ МЕНЕДЖЕРА из Компьютерной Академии ТОП. Снова пробую связаться с Вами по заявке на обучение. Подскажите, Вы интересуетесь обучением для себя или для ребёнка? Напишите удобное время — я перезвоню.\nНаш телефон: ' + TEL, 0],
+    ['Приглашение на встречу после недозвона', 'Через неделю', 'ИМЯ, здравствуйте! Это ИМЯ МЕНЕДЖЕРА, Компьютерная Академия ТОП. Приглашаю Вас на бесплатную встречу в Академию: экскурсия, вступительное тестирование и подбор программы под Вашу цель. Какой день Вам удобен — будний или выходной?\nНаш телефон: ' + TEL, 0],
+    ['Последнее сообщение по заявке', 'Через месяц', 'ИМЯ, здравствуйте! Это Компьютерная Академия ТОП. Не получилось связаться с Вами по заявке на обучение. Если вопрос ещё актуален — напишите или позвоните, будем рады помочь с выбором программы.\nТелефон: ' + TEL + '\nПочта: ' + BRANCH.email + '\nХорошего дня!', 0],
+    ['Недозвон при подтверждении визита', 'Накануне встречи, если клиент не ответил на звонок', 'ИМЯ, здравствуйте! Напоминаю о Вашей встрече в Компьютерной Академии ТОП.\nКогда: ДАТА И ВРЕМЯ\nГде: АДРЕС ФИЛИАЛА\nПожалуйста, подтвердите, что всё в силе. Если планы изменились — напишите, подберём другое время.\nНаш телефон: ' + TEL, 0],
+    ['Недозвон при напоминании о мастер-классе', 'За день до МК, если не дозвонились', 'Здравствуйте, ИМЯ! Мы рады напомнить о Вашей записи на Мастер-класс "НАЗВАНИЕ" в Компьютерной Академии ТОП\nГде: АДРЕС ФИЛИАЛА\nКогда: ДАТА И ВРЕМЯ ЗАПИСИ\nНаш номер телефона: ' + TEL + '\nВозьмите с собой паспорт и хорошее настроение!\nПожалуйста, подтвердите запись', 1]
+  ];
+  function ndzHtml() {
+    var h = '<section class="td-cheat td-anim" id="td-ndz" aria-label="Шаблоны при недозвоне"><div class="td-cheat-head"><span class="td-kind">' + svg('mail') + 'Недозвон</span><h2>Шаблоны сообщений при недозвоне</h2></div>';
+    h += '<p class="td-cheat-src">По регламенту CRM при каждом недозвоне отправляем сообщение в мессенджер. Схема: в день заявки → завтра → через 3 дня → через неделю → через месяц. <a href="doc-doc-049.html">Открыть регламент →</a></p><div class="td-tpl">';
+    h += NDZ.map(function (t, i) {
+      return '<article class="td-tpl-card"><div class="td-tpl-top"><span class="td-tpl-n">' + (i + 1) + '</span><div><h3>' + esc(t[0]) + '</h3><span class="td-chip">' + esc(t[1]) + '</span> <span class="td-chip ' + 'td-seen">' + svg('check') + (t[3] ? 'Из регламента записи на МК' : 'Согласовано') + '</span></div></div><p class="td-tpl-text">' + esc(t[2]) + '</p><button type="button" class="td-copy td-tpl-copy" data-tpl="' + esc(t[2]) + '">Скопировать шаблон</button></article>';
+    }).join('');
+    return h + '</div><p class="td-disclaimer">Перед отправкой замените ИМЯ, ИМЯ МЕНЕДЖЕРА, дату и адрес. Шаблоны 1–5 составлены по схеме дозвона из регламента CRM и согласованы; шаблон 6 — из регламента записи на МК.</p></section>';
   }
 
   /* ---------- применение к разметке (можно вызывать сколько угодно раз) ---------- */
@@ -524,6 +689,26 @@
       if (anchor) anchor.insertAdjacentHTML('afterend', cheatHtml(cheat));
     }
 
+    // шаблоны сообщений: контакты филиала и блок «при недозвоне»
+    if (page === 'messages') {
+      var mw = document.querySelector('.messages-table-wrap'); if (mw && mw.querySelector('table')) localizeTemplates(mw);
+      var mt = document.querySelector('.content > .page-title'); if (mt && DOCS && !document.getElementById('td-ndz')) mt.insertAdjacentHTML('afterend', ndzHtml());
+    }
+    // коротко о направлении
+    if (BRIEF[page] && DOCS && !document.getElementById('td-brief')) {
+      var bt = document.querySelector('.content > .page-title'); if (bt) bt.insertAdjacentHTML('afterend', briefHtml(BRIEF[page]));
+    }
+    // вопрос — ответ и рабочий раздел: свои страницы, заглушку «нет файлов» убираем
+    if ((page === 'faq' || page === 'workspace') && DOCS) {
+      var cont = document.querySelector('.content'), ttl = cont && cont.querySelector(':scope > .page-title');
+      if (ttl && !document.getElementById('tdOwn')) {
+        cont.querySelectorAll(':scope > .section-head, :scope > .empty, :scope > .doc-grid, :scope > .section-intro').forEach(function (x) { x.remove(); });
+        ttl.insertAdjacentHTML('afterend', '<div id="tdOwn">' + (page === 'faq' ? faqHtml() : '<div id="tdWs"><div class="empty">Загружаем раздел…</div></div>') + '</div>');
+        if (page === 'faq') faqFilter();
+      }
+      if (page === 'workspace') { loadWs(); var wsb = document.getElementById('tdWs'); if (WS && wsb && !wsb.dataset.ready) { wsb.dataset.ready = '1'; wsPaint(); } }
+    }
+
     // взрослое образование: подбор курса по запросу клиента (перед сводной таблицей)
     if (page === 'adult-education') {
       loadCourses();
@@ -537,7 +722,7 @@
     }
     // детское образование: презентация продукта и путь обучения
     if (page === 'child-education' && DOCS && !document.getElementById('td-product')) {
-      var ci2 = document.querySelector('.content > .section-intro') || document.querySelector('.content > .page-title');
+      var ci2 = document.getElementById('td-brief') || document.querySelector('.content > .section-intro') || document.querySelector('.content > .page-title');
       if (ci2) ci2.insertAdjacentHTML('afterend', childHtml());
     }
 
@@ -551,6 +736,10 @@
         [[/^процессы продаж$/i, 'td-g4'], [/^образовательные направления$/i, 'td-g5']].forEach(function (x) {
           var b = blockOf(x[0]); if (!b || !b.grid || !b.grid.classList.contains('grid')) return;
           b.grid.classList.add(x[1]);
+          if (x[1] === 'td-g4' && !b.grid.querySelector('a[href$="faq.html"]')) {
+            b.grid.classList.remove('td-g4'); b.grid.classList.add('td-g5');
+            b.grid.insertAdjacentHTML('beforeend', '<a class="card" href="pages/faq.html"><div class="card-top"><div class="card-icon"></div><span class="pill">Помощь</span></div><h3>Вопрос — ответ</h3><p>Что делать в сложных ситуациях: цена по телефону, недозвон, возражения.</p><span class="card-link">Открыть раздел →</span></a><a class="card" href="pages/workspace.html"><div class="card-top"><div class="card-icon"></div><span class="pill">Филиал</span></div><h3>Ссылки и контакты</h3><p>Рабочие таблицы и коллеги филиала. Раздел можно редактировать.</p><span class="card-link">Открыть раздел →</span></a>');
+          }
           if (x[1] === 'td-g5' && !b.grid.querySelector('a[href$="private-school.html"]')) {
             var n = DOCS ? DOCS.filter(function (d) { return d.category === 'Частная школа'; }).length : 0;
             b.grid.insertAdjacentHTML('beforeend', '<a class="card" href="pages/private-school.html"><div class="card-top"><div class="card-icon"></div><span class="pill">Школа</span></div><h3>Частная школа</h3><p>Программы школы, консультации и собеседования с родителями.' + (n ? ' <span class="doc-count">' + n + ' док.</span>' : '') + '</p><span class="card-link">Открыть раздел →</span></a>');
@@ -612,13 +801,42 @@
     if (tab) {
       tab.parentNode.querySelectorAll('.td-tab').forEach(function (x) { var on = x === tab; x.classList.toggle('td-on', on); x.setAttribute('aria-selected', on ? 'true' : 'false'); });
       if (tab.dataset.cheat != null) tab.closest('.td-cheat').querySelectorAll('.td-cheat-panel').forEach(function (pn) { pn.hidden = pn.dataset.cheatPanel !== tab.dataset.cheat; });
+      if (tab.dataset.faq != null) faqFilter();
       if (tab.dataset.need) { var nd = NEEDS.filter(function (x) { return x.k === tab.dataset.need; })[0], body = document.getElementById('tdNeedBody'); if (nd && body) body.innerHTML = needPanel(nd); }
       return;
+    }
+    if (WS && t.closest('#tdWs')) {
+      var id = (t.closest('button') || {}).id || '';
+      if (id === 'tdWsEdit') { wsEdit = true; wsPaint(); return; }
+      if (id === 'tdWsCancel') { wsEdit = false; wsPaint(); return; }
+      if (id === 'tdWsSave') { WS.cur = wsCollect(); wsEdit = false; wsLocal = true; try { localStorage.setItem(WS_KEY, JSON.stringify(WS.cur)); } catch (er) { /* не сохранится после закрытия */ } wsPaint(); return; }
+      if (id === 'tdWsDrop') { try { localStorage.removeItem(WS_KEY); } catch (er) { /* */ } WS.cur = wsNorm(WS.shared); wsLocal = false; wsPaint(); return; }
+      if (id === 'tdWsPublish') {
+        var hp = document.getElementById('tdWsHelp');
+        hp.hidden = false;
+        hp.innerHTML = '<b>Как показать изменения всем коллегам</b><ol><li>Нажмите «Скопировать данные».</li><li>Откройте файл раздела на GitHub (нужен вход владельца сайта).</li><li>Выделите всё в файле, вставьте скопированное и нажмите Commit changes.</li><li>Через 1–2 минуты обновлённый раздел увидят все.</li></ol><div class="td-ws-actions"><button type="button" class="btn" id="tdWsCopy">Скопировать данные</button><a class="td-reset" href="' + WS_EDIT_URL + '" target="_blank" rel="noopener noreferrer">Открыть файл на GitHub ↗</a></div>';
+        return;
+      }
+      if (id === 'tdWsCopy') {
+        var js = JSON.stringify(WS.cur, null, 2), bt2 = t.closest('button'), ok = function () { bt2.textContent = 'Скопировано'; setTimeout(function () { bt2.textContent = 'Скопировать данные'; }, 1600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(js).then(ok, function () { });
+        else { var ta2 = document.createElement('textarea'); ta2.value = js; document.body.appendChild(ta2); ta2.select(); try { document.execCommand('copy'); ok(); } catch (er) { /* */ } ta2.remove(); }
+        return;
+      }
+      var add = t.closest('.td-ws-add'); if (add) { add.previousElementSibling.insertAdjacentHTML('beforeend', wsRow(WS_COLS[add.dataset.wsAdd], {})); var ins = add.previousElementSibling.lastElementChild.querySelector('input'); if (ins) ins.focus(); return; }
+      var del = t.closest('.td-ws-del'); if (del) { del.closest('.td-ws-row').remove(); return; }
     }
     var go = t.closest('.td-course-go');
     if (go) {
       var inp = document.getElementById('adultProgramSearch');
       if (inp) { inp.value = go.dataset.course; inp.dispatchEvent(new Event('input', { bubbles: true })); var target = document.getElementById('adult-summary') || inp; target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      return;
+    }
+    var tc = t.closest('.td-tpl-copy');
+    if (tc) {
+      var fin = function () { tc.textContent = 'Скопировано'; tc.classList.add('td-ok'); setTimeout(function () { tc.textContent = 'Скопировать шаблон'; tc.classList.remove('td-ok'); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(tc.dataset.tpl).then(fin, function () { });
+      else { var ta3 = document.createElement('textarea'); ta3.value = tc.dataset.tpl; document.body.appendChild(ta3); ta3.select(); try { document.execCommand('copy'); fin(); } catch (er) { /* */ } ta3.remove(); }
       return;
     }
     var cp = t.closest('.td-copy');
@@ -642,6 +860,7 @@
   document.addEventListener('input', function (e) {
     var t = e.target;
     if (t.id === 'tdReaderSearch') { readerSearch(t.value); return; }
+    if (t.id === 'tdFaqSearch') { faqFilter(); }
     var p = t.closest && t.closest('.td-filter'); if (p) markFilters(p);
   });
   document.addEventListener('keydown', function (e) {
