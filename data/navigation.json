@@ -81,6 +81,11 @@
         "label": "ВУЗ",
         "href": "pages/university.html",
         "icon": "▣"
+      },
+      {
+        "label": "Частная школа",
+        "href": "pages/private-school.html",
+        "icon": "⌂"
       }
     ]
   },
